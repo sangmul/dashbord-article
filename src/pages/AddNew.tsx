@@ -1,4 +1,3 @@
-// src/pages/AddNew.tsx
 import { useState } from "react";
 import { useCreatePost } from "../hooks/usePosts";
 import { POST_STATUS } from "../constants/post";
@@ -12,16 +11,6 @@ const AddNew = () => {
   });
 
   const createPost = useCreatePost();
-
-//   const submit = async (status: typeof POST_STATUS[keyof typeof POST_STATUS]) => {
-//     await createPost.mutateAsync({ ...form, status });
-//     setForm({ title: "", content: "", category: "" });
-//   };
-
-//   const submit = async (status: typeof POST_STATUS[keyof typeof POST_STATUS]) => {
-//     await createPost.mutateAsync({ ...form, status });
-//   };
-
     const submit = async (status: PostStatus) => {
     await createPost.mutateAsync({ ...form, status }); // ✅ sekarang valid
     };
