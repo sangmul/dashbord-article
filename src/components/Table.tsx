@@ -13,6 +13,12 @@ export default function Table({ data, reload }: Props) {
   const nav = useNavigate();
   const updatePost = useUpdatePost();
 
+  const getStatusColor = (status: string) => {
+    if (status === "publish") return "bg-green-100 text-green-600";
+    if (status === "draft") return "bg-yellow-100 text-yellow-600";
+    return "bg-red-100 text-red-600";
+  };
+
   const handleTrash = async (post: Post) => {
     console.log("handleTrash DATA", post)
     await updatePost.mutateAsync({
@@ -28,31 +34,43 @@ export default function Table({ data, reload }: Props) {
         <tr className="bg-gray-100">
           <th className="border p-2">Title</th>
           <th className="border p-2">Category</th>
+          <th className="border p-2">Status</th> 
           <th className="border p-2">Action</th>
         </tr>
       </thead>
       <tbody>
         {data.map((post) => (
-          <tr key={post.id} className="hover:bg-gray-50">
+            <tr key={post.id} className="hover:bg-gray-50">
+            
             <td className="border p-2">{post.title}</td>
             <td className="border p-2">{post.category}</td>
+
+            {/* ✅ INI TEMPATNYA */}
+            <td className="border p-2">
+                <span
+                className={`px-2 py-1 text-xs rounded ${getStatusColor(post.status)}`}
+                >
+                {post.status}
+                </span>
+            </td>
+
             <td className="border p-2 flex gap-2">
-              <button
+                <button
                 className="bg-blue-500 text-white px-2 py-1 rounded"
                 onClick={() => nav(`/edit/${post.id}`)}
-              >
+                >
                 ✏️
-              </button>
-              <button
+                </button>
+                <button
                 className="bg-red-500 text-white px-2 py-1 rounded"
                 onClick={() => handleTrash(post)}
-              >
+                >
                 🗑️
-              </button>
+                </button>
             </td>
-          </tr>
+            </tr>
         ))}
-      </tbody>
+        </tbody>
     </table>
   );
 }
