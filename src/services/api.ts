@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Post, PostForm } from "../types/post";
 
-export const BASE_URL = "http://localhost:8080";
+export const BASE_URL = "https://service-article-production.up.railway.app/";
 
 // GET all posts with pagination
 export const getPostsAPI = async (limit: number, offset: number): Promise<Post[]> => {
