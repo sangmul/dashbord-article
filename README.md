@@ -28,5 +28,7 @@ cd dashboard-article
 npm install
 npm start
 
+
+used  nvm v22.18.0
 http://localhost:3000
 
